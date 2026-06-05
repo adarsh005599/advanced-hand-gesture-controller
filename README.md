@@ -28,11 +28,15 @@ This project detects hand gestures from a webcam feed and converts them into key
 
 ## Gesture Examples
 ### Open Palm → Right Arrow Key
+![Palm Detection]
 <img width="634" height="520" alt="Screenshot 2026-06-05 211730" src="https://github.com/user-attachments/assets/2c9fa8cd-4822-4242-b95a-0c6a27f5af5a" />
+![Palm Gameplay]
 <img width="4608" height="2080" alt="hg" src="https://github.com/user-attachments/assets/6fb4944a-4eb4-475e-a77b-6f23568aa876" />
 
 ### Fist → Left Arrow Key
+![Fist Detection]
 <img width="641" height="515" alt="Screenshot 2026-06-05 211753" src="https://github.com/user-attachments/assets/498836c0-96a5-4440-94c3-343a3be4acad" />
+![Fist Gameplay]
 <img width="4608" height="2080" alt="hg3" src="https://github.com/user-attachments/assets/17ef7276-b029-4b42-8621-f98065c10065" />
 
 
