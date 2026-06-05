@@ -1,4 +1,4 @@
-<img width="4608" height="2080" alt="hg" src="https://github.com/user-attachments/assets/7e28a080-2009-424b-a1a1-cddb48d83621" /># ✋ Hand Gesture Controller using OpenCV & MediaPipe
+# ✋ Hand Gesture Controller using OpenCV & MediaPipe
 Control keyboard inputs using hand gestures in real time using Python, OpenCV, MediaPipe, and PyAutoGUI.
 
 ## Overview
