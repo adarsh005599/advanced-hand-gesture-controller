@@ -1,54 +1,494 @@
-# ✋ Advanced Hand Gesture Controller
+# 🖐️ Advanced Hand Gesture Controller
 
-Control your computer hands-free using real-time hand gestures. This project uses your webcam to track finger landmarks and translate them into keyboard inputs and system automations like scrolling or switching windows.
+<div align="center">
 
----
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge\&logo=python)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=for-the-badge\&logo=opencv)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Hand%20Tracking-orange?style=for-the-badge)
+![PyAutoGUI](https://img.shields.io/badge/PyAutoGUI-Automation-red?style=for-the-badge)
 
-## 🚀 Overview
+**Control your computer hands-free using real-time hand gestures.**
 
-This application leverages computer vision to turn your hand into an interactive macro controller. By tracking 21 unique points on your hand, it reads the exact state of your fingers to execute precise combinations of system keys without any physical keyboard contact.
+Turn your webcam into a powerful gesture-recognition controller capable of scrolling, switching applications, navigating interfaces, and triggering keyboard actions without touching your keyboard.
 
-### 🎮 Gesture & Action Mapping
-
-| Gesture | Visual Indicator | Keyboard / System Action | Best Used For |
-| :--- | :--- | :--- | :--- |
-| 👊 **Fist** (0 Fingers Up) | `FIST (<- LEFT)` | Holds down **Left Arrow** key | Racing games, navigating menus backward |
-| 🖐️ **Open Palm** (4 Fingers Up) | `PALM (RIGHT ->)` | Holds down **Right Arrow** key | Racing games, moving to next slide |
-| ☝️ **1 Finger Up** (Index) | `1 FINGER -> Scroll UP` | Continuous **Scroll Up** | Reading articles, scrolling feeds |
-| ✌️ **2 Fingers Up** (Peace) | `2 FINGERS -> Scroll DOWN` | Continuous **Scroll Down** | Reading long documents, web browsing |
-| 🤟 **3 Fingers Up** | `3 FINGERS -> Switch Window` | Fires **`Alt + Tab`** (Once) | Quick multitasking and window swapping |
-| 🤏 **Pinch** (Thumb + Index) | `PINCH -> Spacebar` | Presses **Spacebar** (Once) | Pausing/Playing YouTube, jumping in games |
+</div>
 
 ---
 
-## ✨ Features
+## 🎥 Demo
 
-- **Real-Time Hand Tracking:** Ultra-low latency tracking using the modern MediaPipe Tasks vision engine.
-- **Dynamic Joint Visualization:** Automatically draws an interactive green skeleton mapping over your hand joints.
-- **Smart Input Throttling:** Built-in toggle switches prevent key spamming, ensuring events like `Alt + Tab` or `Spacebar` only fire exactly once per gesture.
-- **Self-Healing Setup:** Automatically downloads the required machine learning model file (`hand_landmarker.task`) locally if it is missing from your directory.
+> # Coming Soon
 
----
+```text
+demo.gif
+```
 
-## 🛠️ Built With
-
-- **Python** (Recommended version: `3.12`)
-- **OpenCV** (Real-time video capture & UI frame drawing)
-- **MediaPipe Tasks** (On-device machine learning hand framework)
-- **PyAutoGUI** (Cross-platform programmatic keyboard/mouse simulation)
+A real-time AI-powered gesture control system that tracks your hand using MediaPipe's machine learning model and translates gestures into keyboard inputs and system actions.
 
 ---
 
-## 📋 System Requirements & Prerequisites
+# 🚀 Overview
 
-> [!IMPORTANT]
-> **Python Version Compatibility:** This project requires **Python 3.12**. MediaPipe's underlying native C++ bindings are currently incompatible with Python 3.13 on Windows platforms, which will throw an `AttributeError: function 'free' not found` runtime exception.
+Traditional keyboard shortcuts require physical interaction.
+
+This project removes that dependency by transforming your hand into an intelligent controller.
+
+Using Computer Vision and Machine Learning, the application tracks **21 hand landmarks** in real time and determines the exact state of each finger. Different finger combinations trigger specific keyboard commands and system automations.
+
+Whether you're browsing the web, presenting slides, watching videos, or gaming, your hand becomes the controller.
 
 ---
 
-## 🔧 Installation & Setup
+# ✨ Features
 
-### 1. Clone the Repository
+✅ Real-Time Hand Tracking
+
+✅ Dynamic Hand Skeleton Visualization
+
+✅ Gesture-Based Keyboard Controls
+
+✅ Continuous Scrolling Support
+
+✅ Smart Input Debouncing
+
+✅ One-Time Gesture Triggers
+
+✅ Automatic AI Model Download
+
+✅ Low-Latency Performance
+
+✅ Cross-Platform Python Implementation
+
+---
+
+# 🎮 Gesture Controls
+
+| Gesture          | Action        | Keyboard/System Command | Use Case                      |
+| ---------------- | ------------- | ----------------------- | ----------------------------- |
+| 👊 Fist          | Move Left     | Hold Left Arrow Key     | Racing Games, Menus           |
+| 🖐️ Open Palm    | Move Right    | Hold Right Arrow Key    | Presentations, Navigation     |
+| ☝️ Index Finger  | Scroll Up     | Continuous Scroll Up    | Articles, Websites            |
+| ✌️ Peace Sign    | Scroll Down   | Continuous Scroll Down  | Long Documents                |
+| 🤟 Three Fingers | Switch Window | Alt + Tab               | Multitasking                  |
+| 🤏 Pinch Gesture | Spacebar      | Press Space             | YouTube, Media Players, Games |
+
+---
+
+# 🧠 How It Works
+
+### 1️⃣ Webcam Capture
+
+OpenCV continuously captures video frames from your webcam.
+
+### 2️⃣ Hand Detection
+
+MediaPipe's Hand Landmarker identifies:
+
+* Hand presence
+* Finger positions
+* Joint coordinates
+* Hand orientation
+
+### 3️⃣ Gesture Recognition
+
+The application analyzes:
+
+* Finger states
+* Relative landmark positions
+* Pinch distances
+* Hand direction
+
+to determine which gesture is being performed.
+
+### 4️⃣ Action Execution
+
+PyAutoGUI converts detected gestures into:
+
+* Keyboard presses
+* Key holds
+* Scroll events
+* Application switching commands
+
+---
+
+# 🎯 Gesture Mapping Logic
+
+### Finger Counting
+
+The system determines whether each finger is:
+
+```text
+UP
+or
+DOWN
+```
+
+Then calculates the total number of visible fingers.
+
+Examples:
+
+```text
+0 Fingers  → Fist
+1 Finger   → Scroll Up
+2 Fingers  → Scroll Down
+3 Fingers  → Alt + Tab
+4 Fingers  → Right Arrow
+```
+
+---
+
+### Pinch Detection
+
+The distance between:
+
+```text
+Thumb Tip
+and
+Index Finger Tip
+```
+
+is continuously measured.
+
+When the distance falls below a threshold:
+
+```text
+Distance < Threshold
+```
+
+the application triggers:
+
+```text
+Spacebar Press
+```
+
+---
+
+# 📂 Project Structure
+
 ```bash
-git clone [https://github.com/BhavyaShah2005/hand-gesture-controller.git](https://github.com/BhavyaShah2005/hand-gesture-controller.git)
-cd hand-gesture-controller
+advanced-hand-gesture-controller/
+│
+├── main.py
+├── hand_landmarker.task
+├── requirements.txt
+├── README.md
+│
+└── assets/
+    ├── demo.gif
+    └── screenshots/
+```
+
+---
+
+# 🛠️ Built With
+
+### Python 3.12
+
+Core programming language.
+
+### OpenCV
+
+* Webcam access
+* Frame processing
+* Visual rendering
+
+### MediaPipe Tasks
+
+* Real-time hand landmark detection
+* Machine learning inference
+* Gesture tracking
+
+### PyAutoGUI
+
+* Keyboard automation
+* Scrolling
+* Shortcut execution
+
+---
+
+# 📋 System Requirements
+
+| Requirement | Version                 |
+| ----------- | ----------------------- |
+| Python      | 3.12                    |
+| Webcam      | Required                |
+| RAM         | 4 GB+ Recommended       |
+| OS          | Windows / Linux / macOS |
+
+---
+
+# ⚠️ Important Compatibility Note
+
+MediaPipe currently has compatibility issues with:
+
+```text
+Python 3.13 (Windows)
+```
+
+Using Python 3.13 may result in:
+
+```python
+AttributeError:
+function 'free' not found
+```
+
+### Recommended Version
+
+```bash
+Python 3.12
+```
+
+---
+
+# 🔧 Installation
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/adarsh005599/advanced-hand-gesture-controller.git
+
+cd advanced-hand-gesture-controller
+```
+
+---
+
+## 2. Create Virtual Environment
+
+### Windows
+
+```bash
+python -m venv venv
+
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+pip install opencv-python mediapipe pyautogui
+```
+
+Or:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4. Run Application
+
+```bash
+python main.py
+```
+
+---
+
+# 🎮 Usage
+
+### Start the Application
+
+Run:
+
+```bash
+python main.py
+```
+
+A window named:
+
+```text
+Hand Detection Controller
+```
+
+will appear.
+
+---
+
+### Using Gestures
+
+1. Ensure your hand is visible.
+2. Keep fingers within the camera frame.
+3. Perform supported gestures.
+4. Watch actions execute instantly.
+
+---
+
+### Quit Safely
+
+Press:
+
+```text
+Q
+```
+
+while the camera window is focused.
+
+This will:
+
+* Stop webcam capture
+* Release resources
+* Terminate active key holds
+* Exit cleanly
+
+---
+
+# 🔒 Smart Input Protection
+
+To prevent accidental key spam, the application uses:
+
+### Debouncing
+
+Prevents rapid repeated firing of:
+
+```text
+Alt + Tab
+```
+
+and
+
+```text
+Spacebar
+```
+
+---
+
+### State Tracking
+
+The controller remembers:
+
+```text
+Current Gesture
+Previous Gesture
+```
+
+ensuring commands only execute when intended.
+
+---
+
+# 🧠 Skills Demonstrated
+
+### Computer Vision
+
+* Image Processing
+* Landmark Detection
+* Real-Time Video Analysis
+
+### Machine Learning Integration
+
+* MediaPipe Tasks
+* On-device Inference
+
+### Human Computer Interaction (HCI)
+
+* Gesture-Based Interfaces
+* Alternative Input Systems
+
+### Automation Engineering
+
+* Keyboard Simulation
+* System Shortcuts
+* Event Handling
+
+### Geometry & Mathematics
+
+* Distance Calculations
+* Coordinate Systems
+* Landmark Mapping
+
+---
+
+# 🚀 Future Improvements
+
+### 🎚️ Volume Control
+
+Thumbs Up 👍
+
+```text
+Increase Volume
+```
+
+Thumbs Down 👎
+
+```text
+Decrease Volume
+```
+
+---
+
+### 🖱️ Virtual Mouse
+
+Control the cursor using:
+
+```text
+Index Finger Tracking
+```
+
+---
+
+### ⚙️ Custom Configuration Panel
+
+Allow users to:
+
+* Remap gestures
+* Change shortcuts
+* Adjust sensitivity
+* Create macros
+
+---
+
+### 🎮 Gaming Mode
+
+Dedicated profile for:
+
+* Racing games
+* Platformers
+* Simulators
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Open a Pull Request
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
+
+### Adarsh Singh
+
+Full Stack Developer • AI Enthusiast • Computer Vision Explorer
+
+GitHub:
+
+https://github.com/adarsh005599
+
+---
+
+<div align="center">
+
+⭐ If you found this project useful, consider giving it a star.
+
+Built with ❤️ using Python, OpenCV, MediaPipe, and PyAutoGUI.
+
+</div>
