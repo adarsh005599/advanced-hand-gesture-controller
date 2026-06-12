@@ -1,99 +1,54 @@
-# ✋ Hand Gesture Controller using OpenCV & MediaPipe
-Control keyboard inputs using hand gestures in real time using Python, OpenCV, MediaPipe, and PyAutoGUI.
+# ✋ Advanced Hand Gesture Controller
 
-## Overview
-This project detects hand gestures from a webcam feed and converts them into keyboard actions.
+Control your computer hands-free using real-time hand gestures. This project uses your webcam to track finger landmarks and translate them into keyboard inputs and system automations like scrolling or switching windows.
 
-### Gesture Mapping
-| Gesture | Action |
-|----------|----------|
-| 🖐️ Open Palm | Right Arrow Key |
-| 👊 Fist | Left Arrow Key |
+---
 
-## Features
+## 🚀 Overview
 
-- Real-time hand tracking
-- MediaPipe hand landmark detection
-- Open Palm recognition
-- Fist recognition
-- Keyboard automation using PyAutoGUI
-- Landmark visualization
+This application leverages computer vision to turn your hand into an interactive macro controller. By tracking 21 unique points on your hand, it reads the exact state of your fingers to execute precise combinations of system keys without any physical keyboard contact.
 
-## Technologies Used
+### 🎮 Gesture & Action Mapping
 
-- Python
-- OpenCV
-- MediaPipe
-- PyAutoGUI
+| Gesture | Visual Indicator | Keyboard / System Action | Best Used For |
+| :--- | :--- | :--- | :--- |
+| 👊 **Fist** (0 Fingers Up) | `FIST (<- LEFT)` | Holds down **Left Arrow** key | Racing games, navigating menus backward |
+| 🖐️ **Open Palm** (4 Fingers Up) | `PALM (RIGHT ->)` | Holds down **Right Arrow** key | Racing games, moving to next slide |
+| ☝️ **1 Finger Up** (Index) | `1 FINGER -> Scroll UP` | Continuous **Scroll Up** | Reading articles, scrolling feeds |
+| ✌️ **2 Fingers Up** (Peace) | `2 FINGERS -> Scroll DOWN` | Continuous **Scroll Down** | Reading long documents, web browsing |
+| 🤟 **3 Fingers Up** | `3 FINGERS -> Switch Window` | Fires **`Alt + Tab`** (Once) | Quick multitasking and window swapping |
+| 🤏 **Pinch** (Thumb + Index) | `PINCH -> Spacebar` | Presses **Spacebar** (Once) | Pausing/Playing YouTube, jumping in games |
 
-## Gesture Examples
-### Open Palm → Right Arrow Key
+---
 
-![Palm Detection]
+## ✨ Features
 
-<img width="634" height="520" alt="Screenshot 2026-06-05 211730" src="https://github.com/user-attachments/assets/2c9fa8cd-4822-4242-b95a-0c6a27f5af5a" />
+- **Real-Time Hand Tracking:** Ultra-low latency tracking using the modern MediaPipe Tasks vision engine.
+- **Dynamic Joint Visualization:** Automatically draws an interactive green skeleton mapping over your hand joints.
+- **Smart Input Throttling:** Built-in toggle switches prevent key spamming, ensuring events like `Alt + Tab` or `Spacebar` only fire exactly once per gesture.
+- **Self-Healing Setup:** Automatically downloads the required machine learning model file (`hand_landmarker.task`) locally if it is missing from your directory.
 
-![Palm Gameplay]
+---
 
-<img width="4608" height="2080" alt="hg" src="https://github.com/user-attachments/assets/6fb4944a-4eb4-475e-a77b-6f23568aa876" />
+## 🛠️ Built With
 
+- **Python** (Recommended version: `3.12`)
+- **OpenCV** (Real-time video capture & UI frame drawing)
+- **MediaPipe Tasks** (On-device machine learning hand framework)
+- **PyAutoGUI** (Cross-platform programmatic keyboard/mouse simulation)
 
-### Fist → Left Arrow Key
+---
 
-![Fist Detection]
+## 📋 System Requirements & Prerequisites
 
-<img width="641" height="515" alt="Screenshot 2026-06-05 211753" src="https://github.com/user-attachments/assets/498836c0-96a5-4440-94c3-343a3be4acad" />
+> [!IMPORTANT]
+> **Python Version Compatibility:** This project requires **Python 3.12**. MediaPipe's underlying native C++ bindings are currently incompatible with Python 3.13 on Windows platforms, which will throw an `AttributeError: function 'free' not found` runtime exception.
 
-![Fist Gameplay]
+---
 
-<img width="4608" height="2080" alt="hg3" src="https://github.com/user-attachments/assets/17ef7276-b029-4b42-8621-f98065c10065" />
+## 🔧 Installation & Setup
 
-
-## How It Works
-1. Webcam captures live video.
-2. MediaPipe detects 21 hand landmarks.
-3. Finger positions are analyzed.
-4. Open Palm gesture triggers the Right Arrow key.
-5. Fist gesture triggers the Left Arrow key.
-6. Keys are released when no gesture is detected.
-
-## Installation
-
-Clone the repository:
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/BhavyaShah2005/hand-gesture-controller.git
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the project:
-
-```bash
-python main.py
-```
-## Skills Demonstrated
-
-- Computer Vision
-- Gesture Recognition
-- Real-Time Video Processing
-- Human Computer Interaction (HCI)
-- Python Automation
-
-## Future Improvements
-
-- Additional gestures
-- Volume control
-- Mouse control
-- Presentation controller
-- Custom gesture mapping
-
-## Author
-Bhavya Shah
-
-GitHub:
-https://github.com/BhavyaShah2005
+git clone [https://github.com/BhavyaShah2005/hand-gesture-controller.git](https://github.com/BhavyaShah2005/hand-gesture-controller.git)
+cd hand-gesture-controller
